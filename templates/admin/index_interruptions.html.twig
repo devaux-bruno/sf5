@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-3">Gestion des Incidents</h1>
+    <div class="container-fluid text-center">
+        <div class="text-center">
+            <a class="btn btn-primary" href="{{ path('interruption_add') }}">Ajouter un Incident</a>
+        </div>
+        <div class="table-responsive-sm">
+            <table class="table my-5">
+                <tr>
+                    <th>Id</th>
+                    <th>Type
+                    <th>Description</th>
+                    <th>Transport</th>
+                    <th>Début</th>
+                    <th>Fin</th>
+                    <th>active</th>
+                    <th class="actionAdmin">Action</th>
+                </tr>
+                <div id="accordion">
+                    {% for incident in resultatedit %}
+                        <tr>
+                            <td>{{ incident.Id }}</td>
+                            <td>
+                                {{ incident.type }}
+                            </td>
+                            <td>
+                                {{ incident.description }}
+                            </td>
+                            <td>
+                                {{ incident.transport }}
+                            </td>
+                            <td>
+                                {{ incident.stampBegin|date('d/m/Y H:m')  }}
+                            </td>
+                            {% if incident.stampEnd == incident.stampBegin %}
+                                <td>en cours</td>
+                            {% else %}
+                                <td>
+                                    {{ incident.stampEnd|date('d/m/Y H:m') }}
+                                </td>
+                            {% endif %}
+                            {% if incident.active == 1 %}
+                                <td>
+                                    oui <img class="validLabel" src="{{ asset('asset/images/times-circle-solid.svg') }}" alt="logo non">
+                                </td>
+                            {% else %}
+                                <td>
+                                    résolue <img class="validLabel" src="{{ asset('asset/images/check-circle-solid.svg') }}" alt="logo ok">
+                                </td>
+                            {% endif %}
+                            <td>
+                                <a class="btn btn-success mt-1"
+                                   href="{{ path('solution_add', {'solutionId' : incident.Id}) }}">
+                                    Solution
+                                </a>
+                                <a class="btn btn-primary mt-1"
+                                   href="{{ path('interruption_edit', {'id' : incident.Id}) }}">
+                                    Modifier
+                                </a>
+                                {#<a class="btn btn-danger mt-1"
+                                   href="{{ path('user_admin_delete', {'userId' : incident.Id}) }}">
+                                    Supprimer
+                                </a>#}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </div>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,62 @@
+/****************************************************
+**************          Général             *********
+*****************************************************/
+.logo{height: 50px;}
+.displaynone{display: none}
+.flex{display: flex}
+body{ font-family: 'Faustina', serif;}
+.h2, h2 { font-size: 1.5rem;}
+select{width: 100%;}
+.row{margin-right: 0px !important}
+
+
+/****************************************************
+**************      Navigation              *********
+*****************************************************/
+.navBar{background: #293133 }
+#endNav {height: 10px; width: 100%; background-color: #5eb5e0;  position: relative; }
+.navLink{color: #5eb5e0; font-size: 18px;}
+.navLink:hover{color: #FFFFFF; text-decoration: none;}
+.userLogo, .userNoPic{height: 60px; border: 2px solid #999999; border-radius: 25px;}
+.dropdown-toggle::after { top: 30px; right: 15px;position: relative;}
+.menuPicture{transform: translate3d(-100px, 66px, 0px) !important;}
+.iconenav{display: flex}
+.version{margin-left: 10px; position: relative; top: 50px; color: #5eb5e0}
+.navbar-nav {  right: 0px; position: absolute;  top: 10px;}
+
+
+/***************************************************
+***************       Contenu        ****************
+*****************************************************/
+.borderStyle{ border-left: 1px solid black; border-right: 2px solid black;}
+.borderStyle1{border-right: 2px solid black;    padding-left: 0px; }
+.borderStyle2{ border-left: 2px solid black; }
+.colorRed{font-weight: bold; color: red}
+colorGreen{font-weight: bold; color: green}
+
+
+/***************************************************
+***************       Profil       ****************
+*****************************************************/
+.pictureProfil{height: 200px;}
+
+/***************************************************
+***************  Tables Admin       ****************
+*****************************************************/
+.actionAdmin{width:300px;}
+.logoAdmin{width: 150px;}
+.validLabel{height: 30px}
+
+/***************************************************
+***************     Responsive      ****************
+*****************************************************/
+@media (max-width: 500px) {
+    .navLink{ font-size: 14px;}
+    .version{display: none}
+    .btnIncident{position: relative; right: 60px;}
+}
+@media (max-width: 768px) {
+    .borderStyle{ border-left: none; border-right: none;    }
+    .borderStyle1{border-right: none;}
+    .borderStyle2{ border-left: none; }
+}

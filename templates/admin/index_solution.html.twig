@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-3">Gestion des solutions</h1>
+    <div class="container-fluid text-center">
+        <div class="text-center">
+            <a class="btn btn-primary" href="{{ path('solution_add') }}">Ajouter une solution</a>
+        </div>
+        <div class="table-responsive-sm">
+            <table class="table my-5">
+                <tr>
+                    <th>Id</th>
+                    <th>Id interruption</th>
+                    <th>Solution</th>
+                    <th class="actionAdmin">Action</th>
+                </tr>
+                <div id="accordion">
+                    {% for solution in resultatedit %}
+                        <tr>
+                            <td>{{ solution.id }}</td>
+                            <td>{{ solution.idInter }}</td>
+                            <td>
+                                {{ solution.solutions }}
+                            </td>
+                            <td>
+                                <a class="btn btn-primary mt-1"
+                                   href="{{ path('solution_admin_edit', {'solutionId' : solution.Id}) }}">
+                                    Modifier
+                                </a>
+                                <a class="btn btn-danger mt-1"
+                                   href="{{ path('solution_admin_delete', {'solutionId' : solution.id}) }}">
+                                    Supprimer
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </div>
+            </table>
+        </div>
+    </div>
+{% endblock %}

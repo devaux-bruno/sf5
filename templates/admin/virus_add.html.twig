@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-3">Ajouter votre virus : </h1>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                {{ form_start(formVirusEdit) }}
+                <div class="my-custom-class-for-errors alert-danger">
+                    {{ form_errors(formVirusEdit) }}
+                    <span class="text-danger">{{ form_errors(formVirusEdit.nomVirus) }}</span>
+                    <span class="text-danger">{{ form_errors(formVirusEdit.description) }}</span>
+                    <span class="text-danger">{{ form_errors(formVirusEdit.solution) }}</span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formVirusEdit.nomVirus) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formVirusEdit.description) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formVirusEdit.solution) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mt-3">
+                        {% for solution in resultatedit %}
+                            Ancienne Solution:
+                            <br>{{ solution.solutions }}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 justify-content-center">
+                        {{ form_row(formVirusEdit.save) }}
+                        {{ form_end(formVirusEdit) }}
+                        <a class="btn btn-secondary mt-2" href="{{ path('virus_index') }}">Retour</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

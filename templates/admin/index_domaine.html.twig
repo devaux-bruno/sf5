@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-3">Gestion des Domaines</h1>
+    <div class="container-fluid text-center">
+        <div class="text-center">
+            <a class="btn btn-primary" href="{{ path('domaine_add') }}">Ajouter un domaine</a>
+        </div>
+        <div class="table-responsive-sm">
+            <table class="table my-5">
+                <tr>
+                    <th>Id</th>
+                    <th>Domaine</th>
+                    <th class="actionAdmin">Action</th>
+                </tr>
+                <div id="accordion">
+                    {% for domaine in resultatedit %}
+                        <tr>
+                            <td>{{ domaine.id }}</td>
+                            <td>
+                                {{ domaine.domaine }}
+                            </td>
+                            <td>
+                                <a class="btn btn-primary mt-1"
+                                   href="{{ path('domaine_admin_edit', {'domaineId' : domaine.Id}) }}">
+                                    Modifier
+                                </a>
+                                <a class="btn btn-danger mt-1"
+                                   href="{{ path('domaine_admin_delete', {'domaineId' : domaine.id}) }}">
+                                    Supprimer
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </div>
+            </table>
+        </div>
+    </div>
+{% endblock %}

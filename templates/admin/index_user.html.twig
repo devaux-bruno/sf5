@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-3">Gestion des Utilisateurs</h1>
+    <div class="container-fluid text-center">
+        <div class="text-center">
+            <a class="btn btn-primary" href="{{ path('connexion_inscription') }}">Ajouter un membre</a>
+        </div>
+        <div class="table-responsive-sm">
+            <table class="table my-5">
+                <tr>
+                    <th>Id</th>
+                    <th>Pseudo / Email
+                    <th>Statut</th>
+                    <th>Photo</th>
+                    <th class="actionAdmin">Action</th>
+                </tr>
+                <div id="accordion">
+                    {% for membre in resultatedit %}
+                        <tr>
+                            <td>{{ membre.Id }}</td>
+                            <td>
+                                {{ membre.usernames }}
+                            </td>
+                            <td>
+                                {% if membre.statut == 1  %}
+                                    Admin
+                                {% else %}
+                                    Membre
+                                {% endif %}
+
+                            </td>
+                            <td>
+                                <img class="logoAdmin" src="{{ asset('asset/images/profil/') }}{{ membre.imageprofil }}" alt="picture {{ membre.imageprofil }}">
+                            </td>
+                            <td>
+                                <a class="btn btn-primary"
+                                   href="{{ path('user_admin_edit', {'userId' : membre.Id}) }}">
+                                    Modifier
+                                </a>
+                                <a class="btn btn-danger"
+                                   href="{{ path('user_admin_delete', {'userId' : membre.Id}) }}">
+                                    Supprimer
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </div>
+            </table>
+        </div>
+    </div>
+{% endblock %}

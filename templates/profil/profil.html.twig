@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1 class="text-center mt-5 mb-3 mt-2">Bienvenue {{ app.user.usernames }} !</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 text-center">
+            {% if app.user.imageprofil is empty %}
+                <img class="pictureProfil mt-5 mb-3" src="{{ asset('asset/images/user_nopic.png') }}" alt="nopic">
+            {% else %}
+                <img class="pictureProfil mt-5 mb-3" src="{{ asset('asset/images/profil/') }}{{ app.user.imageprofil }}" alt="profil picture">
+            {% endif %}
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6  mt-5 ">
+            <p><span class="spanProfil">Pseudo :</span> {{ app.user.usernames }}</p>
+            <p><span class="spanProfil">Statut :</span>
+                {% if  app.user.statut == 1 %}
+                    Admin
+                {% else %}
+                    Membre
+                {% endif %}
+            </p>
+            <p>
+                <a class="btn btn-primary mt-2" href="{{ path('user_edit', {'userId' : app.user.id}) }}">Modifier votre profil</a>
+                <a class="btn btn-primary mt-2" href="{{ path('password_edit', {'userId' : app.user.id}) }}">Modifier mot de passe</a>
+            </p>
+        </div>
+    </div>
+    <nav>
+        <div class="nav nav-tabs mt-5  justify-content-center" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Mes Interruptions</a>
+        </div>
+    </nav>
+    {#<div class="tab-content mb-5 " id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="row justify-content-center">
+                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                    {% if resultatarticle is empty  %}
+                        <p class="mt-3 mb-3">Vous n'avez pas créer d'interruption pour l'instant!</p>
+                    {% endif %}
+                    {% for article in resultatarticle %}
+                        {% if article is defined %}
+                            <a class="articleLien " target="_blank" href="{{ path('article', {'articleId' : article.articleId}) }}">
+                                <div class="blockArticle mt-3">
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 imageArticle">
+                                        {% if article.articlePicture is empty %}
+                                            <img class="ArticleNoPic" src="{{ asset('asset/img/user_nopic.png') }}" alt="no picture">
+                                        {% else %}
+                                            <img class="ArticleLogo" src="{{ asset('asset/img/article/') }}{{ article.articlePicture }}" alt="picture {{ article.articleTitle }}">
+                                        {% endif %}
+                                    </div>
+                                    <div class=" col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 descArticle">
+                                        <div class="row">
+                                            <h2 class="mt-3">{{ article.articleTitle |capitalize }}</h2>
+                                        </div>
+                                        <div class="row">
+                                            {{ article.articleDescription | raw }}
+                                        </div>
+                                        <div class="row dateCreated">
+                                            <p class="datePerson">Écrit le {{ article.articleCreateAt |date('d/m/Y à H:m:s') }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>#}
+    </div>
+</div>
+{% endblock %}

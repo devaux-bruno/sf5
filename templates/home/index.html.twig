@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row testStyle">
+            <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 flex">
+                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-left borderStyle1 mt-3">
+                    <h2>Domaine</h2>
+                    <select name="nomDomaine" size="1">
+                        <option>Nom de domaine :</option>
+                        {% for domaine in resultatdomaine %}
+                            <option>{{ domaine.domaine }}</option>
+                        {% endfor %}
+                    </select>
+                    <select name="id" size="1">
+                        {% for domaine in resultatdomaine %}
+                            <option>{{ domaine.id }}</option>
+                        {% endfor %}
+                    </select>
+                    <p class="text-center"><a href="{{ path('domaine_add') }}">Nouveau</a></p>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-left borderStyle mt-3">
+                    <h2>Login</h2>
+                    <select name="nom" size="1">
+                        <option>Nom :</option>
+                        {% set countP = 0 %}
+                        {% for profilsecu in resultatprofilsecu %}
+                            {% set countP = countP+1 %}
+                            {% if countP == 0 %}
+                                <option>Désolé, pas d'inscrit</option>
+                            {% else %}
+                                <option>{{ profilsecu.usernames }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    <select name="id" size="1">
+                        <option>Id :</option>
+                    {% for profilsecu in resultatprofilsecu %}
+                        {% set countP = countP+1 %}
+                        {% if countP == 0 %}
+                            <option>Désolé, pas d'inscrit</option>
+                        {% else %}
+                            <option>{{ profilsecu.id }}</option>
+                        {% endif %}
+                    {% endfor %}
+                    </select>
+                    <p class="text-center"><a href="{{ path('connexion_inscription') }}">Nouveau</a></p>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-left borderStyle mt-3">
+                    <h2>Solution</h2>
+                    <select name="nom" size="1">
+                        {% set countS = 0 %}
+                        {% for solution in resultatsolution %}
+                            {% set countS = countS+1 %}
+                            {% if countS == 0 %}
+                                <option>Désolé, pas de solution</option>
+                            {% else %}
+                                <option>{{ solution.solutions }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-12 col-lg-4 col-xl-4 flex">
+                <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-left borderStyle1 minheight mt-3">
+                    <h2>Incident</h2>
+                    {% if resultatsinterruption is defined %}
+                                {% if resultatsinterruption == 0 %}
+                                    <p><span class="colorGreen">0</span>
+                                {% else %}
+                                    <p><span class="colorRed">{{ resultatsinterruption[0]["COUNT(*)"] }}</span>
+                                {% endif %}
+                        {% endif  %}
+                         en cours</p>
+                    <p class="text-center"><a href="{{ path('interruption_index')}}">Gestion</a></p>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 text-left mt-3">
+                    <h2>Virus</h2>
+                    <p>Compeur virus :
+                        {% set countV = 0 %}
+                        {% if resultatsVirus is defined %}
+                            {% for virus in resultatsVirus %}
+                                {% set countV = countV+1 %}
+                            {% endfor %}
+                            {{ countV }}
+                        {% else %}
+                            0
+                        {% endif %}
+                        </span>
+                    </p>
+                    <p class="text-center"><a href="{{ path('virus_add') }}">Ajouter</a></p>
+                </div>
+                <div class="col-sm-4 col-md-6 col-lg-4 col-xl-4 text-left borderStyle2 mt-3">
+                    <h2>Statistique</h2>
+                    <p>{{ "now"|date("m/d/Y à H:i") }}</p>
+                    <p class="text-center"><a href="#">Import</a></p>
+                    <p class="text-center"><a href="#">Nouveau</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

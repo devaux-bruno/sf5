@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Test NetCommeWeb</title>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+        <meta name="description" content="Voici plusieurs alternatives de cet exercice" />
+        <meta name="author" content="Bruno Devaux">
+        <title>{% block title %}Secuserve{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+            <link href="https://fonts.googleapis.com/css?family=Faustina&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}">
+        {% endblock %}
+    </head>
+    <body>
+    <h1 class="displaynone">
+    Secuserve
+    </h1>
+    {% block navigation %}
+        <nav class="navBar">
+            <div class="row">
+                <div class="col-1 mt-3 mb-3">
+                    <a href="{{path('home')}}"><img class="logo" src="{{asset('asset/images/logo.png')}}" alt="logo secuserve"></a>
+                </div>
+                <div class="col-7 flex mt-3">
+                    <div class="col-2">
+                    <a class="navLink" href="{{ path('home') }}">
+                        Back Office
+                        <br>
+                        Secuserve
+                    </a>
+                    </div>
+                    <div class="col-auto">
+                        <a href="{{ path('domaine_index') }}" class="navLink">
+                            <p>Domaine</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-1 mt-3">
+                    <a class="btn btn-primary btnIncident" href="{{ path('interruption_add') }}">Ajouter Incident</a>
+                </div>
+                <div class="col-3 text-right ">
+                    <div class="iconenav mt-4">
+                        {% if app.user %}
+                        <ul class="navbar-nav mr-auto list-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {% if app.user.imageprofil is empty %}
+                                        <img class="userNoPic" src="{{ asset('asset/images/user_nopic.png') }}" alt="no picture">
+                                    {% else %}
+                                        <img class="userLogo" src="{{ asset('asset/images/profil/') }}{{ app.user.imageprofil }}" alt="picture profil">
+                                    {% endif %}
+                                </a>
+                                <div class="dropdown-menu menuPicture" aria-labelledby="dropdown05">
+                                    <a class="dropdown-item" href="{{ path('mon_compte') }}">Mon Profil</a>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <a class="dropdown-item" href="{{ path('user_index') }}">Gestion Login</a>
+                                        <a class="dropdown-item" href="{{ path('interruption_index') }}">Gestion incidents</a>
+                                        <a class="dropdown-item" href="{{ path('virus_index') }}">Gestion virus</a>
+                                        <a class="dropdown-item" href="{{ path('domaine_index') }}">Gestion domaines</a>
+                                        <a class="dropdown-item" href="{{ path('solution_index') }}">Gestion Solutions</a>
+                                        {#<a class="dropdown-item" href="#">Statistiques</a>#}
+                                    {% endif %}
+                                    <a class="dropdown-item" href="{{ path('app_logout') }}">Deconnexion</a>
+                                </div>
+                            </li>
+                        </ul>
+                        {% else %}
+                            <a class="btn btn-outline-light" href="{{ path('app_login') }}">Connexion</a>
+                            <a class="btn btn-outline-light" href="{{ path('connexion_inscription') }}">Inscription</a>
+                            <span class="version">v2.0</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div id="endNav"></div>
+        </nav>
+        {% for message in app.flashes('success') %}
+            <div class="container">
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <div class="container">
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+    {% endblock %}
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+            <script src="{{ asset('asset/js/script.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

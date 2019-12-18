@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-3">Gestion des virus</h1>
+    <div class="container-fluid text-center">
+        <div class="text-center">
+            <a class="btn btn-primary" href="{{ path('virus_add') }}">Ajouter un virus</a>
+        </div>
+        <div class="table-responsive-sm">
+            <table class="table my-5">
+                <tr>
+                    <th>Id</th>
+                    <th>Id Interruption(facultatif)</th>
+                    <th>Nom Virus</th>
+                    <th>Description</th>
+                    <th>Id Solution</th>
+                    <th class="actionAdmin">Action</th>
+                </tr>
+                <div id="accordion">
+                    {% for virus in resultatedit %}
+                        <tr>
+                            <td>{{ virus.id }}</td>
+                            <td>
+                                {{ virus.idInter }}
+                            </td>
+                            <td>
+                                {{ virus.nomVirus }}
+                            </td>
+                            <td>
+                                {{ virus.description }}
+                            </td>
+                            <td>
+                                {{ virus.solution  }}
+                            </td>
+                            <td>
+                                <a class="btn btn-success mt-1"
+                                   href="{{ path('solution', {'id' : virus.id}) }}">
+                                    Solution
+                                </a>
+                                <a class="btn btn-primary mt-1"
+                                   href="{{ path('virus_admin_edit', {'virusId' : virus.Id}) }}">
+                                    Modifier
+                                </a>
+                                <a class="btn btn-danger mt-1"
+                                   href="{{ path('virus_admin_delete', {'virusId' : virus.id}) }}">
+                                    Supprimer
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </div>
+            </table>
+        </div>
+    </div>
+{% endblock %}

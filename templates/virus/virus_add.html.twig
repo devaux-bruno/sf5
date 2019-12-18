@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-3">Ajouter un Virus</h1>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                {{ form_start(formInterruptions) }}
+                <div class="my-custom-class-for-errors alert-danger">
+                    {{ form_errors(formInterruptions) }}
+                    <span class="text-danger">{{ form_errors(formInterruptions.nomVirus) }}</span>
+                    <span class="text-danger">{{ form_errors(formInterruptions.description) }}</span>
+                    <span class="text-danger">{{ form_errors(formInterruptions.solution) }}</span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formInterruptions.nomVirus) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formInterruptions.description) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formInterruptions.solution) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 justify-content-center">
+                        {{ form_row(formInterruptions.save) }}
+                        {{ form_end(formInterruptions) }}
+                        <a class="btn btn-secondary mt-2" href="{{ path('home') }}">Retour</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
