@@ -58,7 +58,7 @@ class SolutionController extends AbstractController
         return $this->render(
             'solution/index.html.twig',
             [
-                'formInterruptions' => $form->createView(),
+                'formDomaineEdit' => $form->createView(),
             ]);
     }
 
@@ -83,7 +83,7 @@ class SolutionController extends AbstractController
             $this->addFlash('success', 'La solution a bien été modifiée!');
             return $this->redirectToRoute('domaine_index',[]);
         }
-        return $this->render('admin/domaine_admin_edit.html.twig',[
+        return $this->render('admin/solution_admin_edit.html.twig',[
             'formDomaineEdit' => $form->createView(),
         ]);
 

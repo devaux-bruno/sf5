@@ -30,13 +30,13 @@
                                 {{ virus.description }}
                             </td>
                             <td>
-                                {{ virus.solution  }}
+                                {% if virus.solution is not null %}
+                                    <a href="{{ path('solution_index') }}">{{ virus.solution.id }}</a>
+                                {% else  %}
+                                    Aucune
+                                {%  endif %}
                             </td>
                             <td>
-                                <a class="btn btn-success mt-1"
-                                   href="{{ path('solution', {'id' : virus.id}) }}">
-                                    Solution
-                                </a>
                                 <a class="btn btn-primary mt-1"
                                    href="{{ path('virus_admin_edit', {'virusId' : virus.Id}) }}">
                                     Modifier

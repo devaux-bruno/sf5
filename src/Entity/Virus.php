@@ -45,11 +45,32 @@ class Virus
     private $description;
 
     /**
-     * @var int
+     * @var Solution
      *
-     * @ORM\Column(name="solution", type="integer", length=60, nullable=true)
+     * @ORM\ManyToOne(targetEntity="Solution", inversedBy="idVirusSolution")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="solution", referencedColumnName="id")
+     * })
      */
-    private $solution;
+    private $Solution;
+
+    /**
+     * @return Solution
+     */
+    public function getSolution()
+    {
+        return $this->Solution;
+    }
+
+    /**
+     * @param Solution $Solution
+     * @return Virus
+     */
+    public function setSolution(Solution $Solution)
+    {
+        $this->Solution = $Solution;
+        return $this;
+    }
 
     /**
      * @return int
@@ -120,24 +141,6 @@ class Virus
     public function setDescription(string $description)
     {
         $this->description = $description;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSolution(): ?int
-    {
-        return $this->solution;
-    }
-
-    /**
-     * @param int $solution
-     * @return Virus
-     */
-    public function setSolution(int $solution)
-    {
-        $this->solution = $solution;
         return $this;
     }
 

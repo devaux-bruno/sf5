@@ -36,6 +36,29 @@ class Solution
     private $solutions;
 
     /**
+     * @ORM\OneToMany(targetEntity="Virus", mappedBy="Solution")
+     */
+    private $idVirusSolution;
+
+    /**
+     * @return mixed
+     */
+    public function getIdVirusSolution()
+    {
+        return $this->idVirusSolution;
+    }
+
+    /**
+     * @param mixed $idVirusSolution
+     * @return Solution
+     */
+    public function setIdVirusSolution($idVirusSolution)
+    {
+        $this->idVirusSolution = $idVirusSolution;
+        return $this;
+    }
+
+    /**
      * @return int
      */
     public function getId(): int
